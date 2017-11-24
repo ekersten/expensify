@@ -27,13 +27,15 @@ export default class ExpenseForm extends React.Component {
 
     onAmmountChange = (e) => {
         const ammount = e.target.value;
-        if (ammount.match(/^\d*(\.\d{0,2})?$/)){
+        if (!ammount || ammount.match(/^\d{1,}(\.\d{0,2})?$/)){
             this.setState(() => ({ ammount }));
         }
     };
 
     onDateChange = (createdAt) => {
-        this.setState(() => ({ createdAt }));
+        if(createdAt) {
+            this.setState(() => ({ createdAt }));
+        }
     };
 
     onFocusChange = ({ focused }) => {
