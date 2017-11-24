@@ -2,13 +2,13 @@ import { createStore, combineReducers } from 'redux';
 import uuid from 'uuid';
 
 // ADD_EXPENSE
-const addExpense = ({ description = '', note = '', ammount = 0, createdAt = 0 } = {}) => ({
+const addExpense = ({ description = '', note = '', amount = 0, createdAt = 0 } = {}) => ({
     type: 'ADD_EXPENSE',
     expense: {
         id: uuid(),
         description,
         note,
-        ammount,
+        amount,
         createdAt
     }
 })
@@ -36,9 +36,9 @@ const setTextFilter = (text = '') => ({
 const sortByDate = () => ({
     type: 'SORT_BY_DATE'
 })
-// SORT_BY_AMMOUNT
-const sortByAmmount = () => ({
-    type: 'SORT_BY_AMMOUNT'
+// SORT_BY_AMOUNT
+const sortByAmount = () => ({
+    type: 'SORT_BY_AMOUNT'
 })
 // SET_START_DATE
 const setStartDate = (startDate) => ({
@@ -101,10 +101,10 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
                 sortBy: 'date'
             }
 
-        case 'SORT_BY_AMMOUNT':
+        case 'SORT_BY_AMOUNT':
             return {
                 ...state,
-                sortBy: 'ammount'
+                sortBy: 'amount'
             }
         
         case 'SET_START_DATE':
@@ -136,8 +136,8 @@ const getVisibleExpenses = (expenses, {text, sortBy, startDate, endDate}) => {
             return a.createdAt > b.createdAt ? 1 : -1
         }
 
-        if (sortBy === 'ammount') {
-            return a.ammount > b.ammount ? -1 : 1;
+        if (sortBy === 'amount') {
+            return a.amount > b.amount ? -1 : 1;
         }
 
         return 0;
@@ -159,16 +159,16 @@ store.subscribe(() => {
     console.log(visibleExpenses);
 })
 
-const expenseOne = store.dispatch(addExpense({ description: 'Rent', ammount: 100, createdAt: -21000 }));
-const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', ammount: 300, createdAt: -1000 }));
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100, createdAt: -21000 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 300, createdAt: -1000 }));
 
 // store.dispatch(removeExpense({ id: expenseOne.expense.id }));
-// store.dispatch(editExpense(expenseTwo.expense.id, { ammount: 500 }));
+// store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
 
 store.dispatch(setTextFilter('cof'));
 store.dispatch(setTextFilter());
 
-store.dispatch(sortByAmmount());
+store.dispatch(sortByAmount());
 // store.dispatch(sortByDate());
 
 // store.dispatch(setStartDate(0));

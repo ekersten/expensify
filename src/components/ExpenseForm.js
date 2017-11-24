@@ -11,7 +11,7 @@ export default class ExpenseForm extends React.Component {
     state = {
         description: '',
         note: '',
-        ammount: '',
+        amount: '',
         createdAt: moment(),
         calendarFocused: false,
         error: ''
@@ -26,10 +26,10 @@ export default class ExpenseForm extends React.Component {
         this.setState(() => ({ note }));
     }
 
-    onAmmountChange = (e) => {
-        const ammount = e.target.value;
-        if (!ammount || ammount.match(/^\d{1,}(\.\d{0,2})?$/)) {
-            this.setState(() => ({ ammount }));
+    onAmountChange = (e) => {
+        const amount = e.target.value;
+        if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+            this.setState(() => ({ amount }));
         }
     };
 
@@ -47,8 +47,8 @@ export default class ExpenseForm extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        if (!this.state.description || !this.state.ammount) {
-            this.setState(() => ({ error: 'Please provide description and ammount.' }));
+        if (!this.state.description || !this.state.amount) {
+            this.setState(() => ({ error: 'Please provide description and amount.' }));
         } else {
             this.setState(() => ({ error: '' }));
             console.log('submmited!');
@@ -69,9 +69,9 @@ export default class ExpenseForm extends React.Component {
                     />
                     <input
                         type="text"
-                        placeholder="Ammount"
-                        value={this.state.ammount}
-                        onChange={this.onAmmountChange}
+                        placeholder="Amount"
+                        value={this.state.amount}
+                        onChange={this.onAmountChange}
                     />
 
                     <SingleDatePicker
