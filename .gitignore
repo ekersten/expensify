@@ -1,4 +1,5 @@
 /node_modules
-/public/*
-!/public/index.html
-!/public/images
+/public/bundle.js
+/public/bundle.js.map
+/public/styles.css
+/public/styles.css.map
