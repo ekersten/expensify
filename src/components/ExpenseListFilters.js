@@ -22,7 +22,7 @@ export class ExpenseListFilters extends React.Component {
     };
 
     onTextChange = (e) => {
-        this.propssetTextFilter(e.target.value);
+        this.props.setTextFilter(e.target.value);
     }
 
     onSortChange = (e) => {
