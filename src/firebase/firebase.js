@@ -21,12 +21,20 @@ database.ref().set({
         city: 'Villa del Parque',
         country: 'Argentina'
     }
+}).then(() => {
+    console.log('Data is saved');
+}).catch((e) => {
+    console.log('This failed.', e);
 });
 
-database.ref('age').set(36);
-database.ref('location/city').set('Ciudad de Buenos Aires');
+// database.ref('age').set(36);
+// database.ref('location/city').set('Ciudad de Buenos Aires');
 
 database.ref('attributes').set({
     height: 180,
     weight: 90
+}).then(() => {
+    console.log('Data synced');
+}).catch((e) => {
+    console.warn('This went wrong.', e);
 });
