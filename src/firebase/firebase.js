@@ -15,25 +15,44 @@ const database = firebase.database();
 
 const expenses = database.ref('expenses');
 
-expenses.push({
-    description: 'Gas Bill',
-    amount: 10000,
-    note: 'this is my gas bill',
-    createdAt: 2000
+const snapshotToArray = (snapshot) => {
+    const expenses = [];
+    snapshot.forEach((childSnapshot) => {
+        expenses.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+        });
+    });
+
+    console.log(expenses);
+}
+
+expenses.on('child_removed', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
 });
 
-expenses.push({
-    description: 'Water Bill',
-    amount: 25000,
-    note: '',
-    createdAt: 3000
+expenses.on('child_changed', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
 });
+
+expenses.on('child_added', (snapshot) => {
+    console.log('new expense', snapshot.key, snapshot.val());
+});
+
+// expenses
+//     .once('value')
+//     .then(snapshotToArray)
+//     .catch((e) => {
+//         console.log('Error fetching data.', e);
+//     })
+
+// expenses.on('value', snapshotToArray);
 
 expenses.push({
     description: 'Cable Bill',
-    amount: 1500,
-    note: '',
-    createdAt: 1500
+    amount: 10000,
+    note: 'the bill from telecentro',
+    createdAt: 2000
 });
 
 
