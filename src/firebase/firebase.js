@@ -13,18 +13,56 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
+const expenses = database.ref('expenses');
 
-database.ref().on('value', (snapshot) => {
-    const data = snapshot.val();
-    console.log(`${data.name} is a ${data.job.title} at ${data.job.company}`)
-}, (e) => {
-    console.log('Error fetching data.', e);
+expenses.push({
+    description: 'Gas Bill',
+    amount: 10000,
+    note: 'this is my gas bill',
+    createdAt: 2000
 });
 
-database.ref().update({
-    'job/company': 'Fullstack Developer',
-    'job/title': 'EGO'
+expenses.push({
+    description: 'Water Bill',
+    amount: 25000,
+    note: '',
+    createdAt: 3000
 });
+
+expenses.push({
+    description: 'Cable Bill',
+    amount: 1500,
+    note: '',
+    createdAt: 1500
+});
+
+
+
+
+
+
+
+
+
+// database.ref('notes').push({
+//     title: 'Go to Full Stack Tech 2017',
+//     body: 'tecnopolis'
+// });
+
+// database.ref('notes/-L-8BYZN6p05KUpbPtcy').remove();
+
+
+// database.ref().on('value', (snapshot) => {
+//     const data = snapshot.val();
+//     console.log(`${data.name} is a ${data.job.title} at ${data.job.company}`)
+// }, (e) => {
+//     console.log('Error fetching data.', e);
+// });
+
+// database.ref().update({
+//     'job/company': 'Fullstack Developer',
+//     'job/title': 'EGO'
+// });
 
 // const onValueChange = database.ref().on('value', (snapshot) => {
 //     console.log(snapshot.val());
