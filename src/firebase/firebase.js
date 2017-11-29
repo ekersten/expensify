@@ -13,29 +13,57 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref().set({
-    name: 'Eric Kersten',
-    age: 35,
-    stressLevel: 6,
-    job: {
-        title: 'Developer',
-        company: 'Google'
-    },
-    location: {
-        city: 'Villa del Parque',
-        country: 'Argentina'
-    }
-}).then(() => {
-    console.log('Data is saved');
-}).catch((e) => {
-    console.log('This failed.', e);
+
+const onValueChange = database.ref().on('value', (snapshot) => {
+    console.log(snapshot.val());
 });
 
-database.ref().update({
-    stressLevel: 9,
-    'job/company': 'Amazon',
-    'location/city': 'Belgrano'
-});
+setTimeout(() => {
+    database.ref('age').set(35)
+}, 3500);
+
+setTimeout(() => {
+    database.ref().off(onValueChange);
+}, 7000);
+
+setTimeout(() => {
+    database.ref('age').set(36)
+}, 10500);
+
+// database.ref('location/city')
+//     .once('value')
+//     .then((snapshot) => {
+//         const val = snapshot.val();
+//         console.log(val);
+//     })
+//     .catch((e) => {
+//         console.log('Error fetching data.', e);
+//     });
+
+
+// database.ref().set({
+//     name: 'Eric Kersten',
+//     age: 35,
+//     stressLevel: 6,
+//     job: {
+//         title: 'Developer',
+//         company: 'Google'
+//     },
+//     location: {
+//         city: 'Villa del Parque',
+//         country: 'Argentina'
+//     }
+// }).then(() => {
+//     console.log('Data is saved');
+// }).catch((e) => {
+//     console.log('This failed.', e);
+// });
+
+// database.ref().update({
+//     stressLevel: 9,
+//     'job/company': 'Amazon',
+//     'location/city': 'Belgrano'
+// });
 
 // database.ref().remove().then(() => {
 //     console.log('Data removed');
