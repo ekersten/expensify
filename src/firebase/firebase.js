@@ -16,7 +16,11 @@ const database = firebase.database();
 database.ref().set({
     name: 'Eric Kersten',
     age: 35,
-    isSingle: false,
+    stressLevel: 6,
+    job: {
+        title: 'Developer',
+        company: 'Google'
+    },
     location: {
         city: 'Villa del Parque',
         country: 'Argentina'
@@ -27,14 +31,14 @@ database.ref().set({
     console.log('This failed.', e);
 });
 
-// database.ref('age').set(36);
-// database.ref('location/city').set('Ciudad de Buenos Aires');
-
-database.ref('attributes').set({
-    height: 180,
-    weight: 90
-}).then(() => {
-    console.log('Data synced');
-}).catch((e) => {
-    console.warn('This went wrong.', e);
+database.ref().update({
+    stressLevel: 9,
+    'job/company': 'Amazon',
+    'location/city': 'Belgrano'
 });
+
+// database.ref().remove().then(() => {
+//     console.log('Data removed');
+// }).catch((e) => {
+//     console.log('Did not remove data.', e);
+// });
